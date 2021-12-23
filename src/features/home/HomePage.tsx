@@ -12,12 +12,14 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { Link } from 'react-router-dom';
 import LinkButton from '../../app/common/LinkButton';
+import { observer } from 'mobx-react-lite';
+import { useStore } from '../../app/stores/store';
 
 
 
 
-export default function HomePage() {
-
+export default observer(function HomePage() {
+    const { userStore, modalStore } = useStore();
     return (
         <Container component="main" maxWidth="xs">
             <Box
@@ -26,17 +28,37 @@ export default function HomePage() {
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
+
                 }}
             >
-                <Typography component="h1" variant="h5">
+                <Typography component="h1" variant="h5" sx={{
+                    marginBottom: '2rem'
+                }}>
                     Welcome to the App
                 </Typography>
 
-                <LinkButton to="/dashboard" variant="contained" >
-                    Go to Dashboard
-                </LinkButton>
+
+                {userStore.isLoggedIn ? (
+                    <>
+                        <LinkButton to="/dashboard" variant="contained" >
+                            Go to Dashboard
+                        </LinkButton>
+                    </>
+
+                ) : (
+                    <>
+                        <LinkButton to="/login" variant="contained" >
+                            Log In
+                        </LinkButton>
+
+                    </>
+
+                )}
+
+
+
 
             </Box>
         </Container>
     );
-}
+}) 
