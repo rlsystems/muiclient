@@ -6,6 +6,7 @@ import Box from '@mui/material/Box';
 
 import BrandListTable from './BrandListTable';
 import { Container } from '@mui/material';
+import BrandHeader from './BrandHeader';
 
 
 
@@ -36,7 +37,8 @@ export default observer(function BrandDashboard() {
                 overflow: 'auto',
             }}
         >
-            <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+            <Container maxWidth={false} sx={{ mt: 4, mb: 4 }}>
+                <BrandHeader/>
                 <BrandListTable />
             </Container>
 

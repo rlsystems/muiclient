@@ -17,7 +17,7 @@ import { Link } from 'react-router-dom';
 export default observer(function NavBar() {
     const { userStore: { currentUser, logout } } = useStore();
     return (
-        <Drawer variant="permanent" open={true}>
+        <Drawer variant="permanent" open={true} sx={{width: '240px', '& .MuiDrawer-paper':{width: '240px'}}}>
             <Toolbar
                 sx={{
                     display: 'flex',

@@ -1,3 +1,4 @@
+import { Box } from '@mui/material';
 import { observer } from 'mobx-react-lite';
 import * as React from 'react';
 import { useEffect } from 'react';
@@ -38,22 +39,26 @@ function App() {
   return (
     <>
       <ToastContainer position='bottom-right' hideProgressBar />
+
       <Switch>
         <Route exact path='/login' component={LoginPage} />
         <Route exact path='/' component={HomePage} />
         <Route
           path={'/(.+)'}
           render={() => (
-            <>
-              <NavBar />
+          
+              <Box sx={{ display: 'flex' }}>
+                <NavBar />
 
-              <Switch>
-                <Route exact path='/dashboard' component={Dashboard} />
-                <Route exact path='/orders' component={Orders} />
-                <Route exact path='/brands' component={BrandDashboard} />
-              </Switch>
+                <Switch>
+                  <Route exact path='/dashboard' component={Dashboard} />
+                  <Route exact path='/orders' component={Orders} />
+                  <Route exact path='/brands' component={BrandDashboard} />
+                </Switch>
+              </Box>
 
-            </>
+
+          
           )} />
       </Switch>
 
