@@ -11,7 +11,6 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { Link } from 'react-router-dom';
-import LinkButton from '../../app/common/LinkButton';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../app/stores/store';
 
@@ -39,16 +38,16 @@ export default observer(function HomePage() {
 
                 {userStore.isLoggedIn ? (
                     <>
-                        <LinkButton to="/dashboard" variant="contained" >
+                        <Button component={Link} to="/dashboard" variant="contained" >
                             Go to Dashboard
-                        </LinkButton>
+                        </Button>
                     </>
 
                 ) : (
                     <>
-                        <LinkButton to="/login" variant="contained" >
+                        <Button component={Link} to="/login" variant="contained" >
                             Login
-                        </LinkButton>
+                        </Button>
 
                     </>
 

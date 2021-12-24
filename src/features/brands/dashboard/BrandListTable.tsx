@@ -1,6 +1,7 @@
-import { Link, Paper, Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@mui/material';
+import { Button, Paper, Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@mui/material';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../../app/stores/store';
+import { Link } from 'react-router-dom';
 
 function preventDefault(event: React.MouseEvent) {
     event.preventDefault();
@@ -26,7 +27,7 @@ export default observer(function BrandListTable() {
                             <TableCell>Description</TableCell>
                             <TableCell>GUID</TableCell>
 
-                            <TableCell align="right">Edit</TableCell>
+                            <TableCell align="right"></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -35,14 +36,24 @@ export default observer(function BrandListTable() {
                                 <TableCell>{brand.name}</TableCell>
                                 <TableCell>{brand.description}</TableCell>
                                 <TableCell>{brand.id}</TableCell>
-                                <TableCell>EDIT</TableCell>
+                                <TableCell sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+                                    <Button
+                                        variant="outlined"
+                                        color="error"
+                                        onClick={() => brandStore.deleteBrand(brand.id)}
+                                        sx={{ mr: 1 }}
+                                    >
+                                        Delete
+                                    </Button>
+                                    <Button component={Link} to={`/editBrand/${brand.id}`} variant="contained" >
+                                        Edit
+                                    </Button>
+                                </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
                 </Table>
-                <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>
-                    See more orders
-                </Link>
+
             </Paper>
 
 

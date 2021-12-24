@@ -5,7 +5,6 @@ import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -14,6 +13,8 @@ import Container from '@mui/material/Container';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../app/stores/store';
 import * as yup from 'yup';
+import { LoadingButton } from '@mui/lab';
+import { Link } from 'react-router-dom';
 
 import { ErrorMessage, Form, Formik, useFormik } from 'formik';
 
@@ -35,20 +36,21 @@ const validationSchema = yup.object({
 
 export default observer(function LoginPage() {
   const { userStore } = useStore();
-  
+
   const formik = useFormik({
     initialValues: {
       tenant: '',
       email: '',
       password: '',
     },
+    enableReinitialize: true,
     validationSchema: validationSchema,
     onSubmit: (values) => {
       userStore.login(values);
-    },
+    }
   });
 
-  
+
 
   return (
     <Container component="main" maxWidth="xs">
@@ -68,7 +70,7 @@ export default observer(function LoginPage() {
         </Typography>
 
         <form onSubmit={formik.handleSubmit}>
-        <TextField
+          <TextField
             fullWidth
             margin="normal"
             id="tenant"
@@ -76,6 +78,7 @@ export default observer(function LoginPage() {
             label="Tenant"
             value={formik.values.tenant}
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             error={formik.touched.tenant && Boolean(formik.errors.tenant)}
             helperText={formik.touched.tenant && formik.errors.tenant}
           />
@@ -87,6 +90,7 @@ export default observer(function LoginPage() {
             label="Email"
             value={formik.values.email}
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             error={formik.touched.email && Boolean(formik.errors.email)}
             helperText={formik.touched.email && formik.errors.email}
           />
@@ -99,15 +103,34 @@ export default observer(function LoginPage() {
             type="password"
             value={formik.values.password}
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             error={formik.touched.password && Boolean(formik.errors.password)}
             helperText={formik.touched.password && formik.errors.password}
           />
-          <Button  color="primary" variant="contained" fullWidth type="submit">
+
+          <LoadingButton
+            sx={{ mt: 3, mb: 2 }}
+            disabled={!formik.dirty || !formik.isValid}
+            color="primary" variant="contained"
+            fullWidth type="submit"
+            loading={formik.isSubmitting}
+
+          >
             Submit
-          </Button>
+          </LoadingButton>
+          
         </form>
 
 
+      </Box>
+      <Box>
+        Tenant: root
+      </Box>
+      <Box>
+        Email: admin@root.com
+      </Box>
+      <Box>
+        Pass: 123Pa$$word!
       </Box>
     </Container>
   );

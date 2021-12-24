@@ -3,12 +3,14 @@ import React, { useEffect, useState } from 'react';
 import { Link, useHistory, useParams } from 'react-router-dom';
 import LoadingComponent from '../../../app/layout/LoadingComponent';
 import { useStore } from '../../../app/stores/store';
-import { Formik } from 'formik';
+import { Formik, Form, Field, ErrorMessage, useFormik } from 'formik';
 import * as Yup from 'yup';
 
 
 import { Brand } from '../../../app/models/brand';
 import { Box, Button, Container, FormControlLabel, Grid, TextField, Typography } from '@mui/material';
+import FormikField from '../../../app/common/FormikField';
+import { LoadingButton } from '@mui/lab';
 
 
 
@@ -39,32 +41,24 @@ export default observer(function BrandForm() {
     }, [id, loadBrand])
 
 
-
-
-    function handleFormSubmit(brand: Brand) {
-        if (brand.id.length === 0) {
-
-
-            createBrand(brand).then(() => history.push(`/brands/`))
-        } else {
-            updateBrand(brand).then(() => history.push(`/editBrand/${brand.id}`))
+    const formik = useFormik({
+        initialValues: brand,
+        validationSchema: validationSchema,
+        enableReinitialize: true,
+        onSubmit: (brand: Brand) => {
+            if (brand.id.length === 0) {
+                createBrand(brand).then(() => history.push(`/brands/`))
+            } else {
+                updateBrand(brand).then(() => history.push(`/editBrand/${brand.id}`))
+            }
         }
-    }
-
-
-    const handleSubmit = (event: any) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        // eslint-disable-next-line no-console
-        console.log({
-          email: data.get('email'),
-          password: data.get('password'),
-        });
-      };
+    });
 
 
 
-    if (loadingInitial) return <LoadingComponent content='Loading activity...' />
+
+
+    if (loadingInitial) return <LoadingComponent content='Loading brand...' />
 
     return (
         <Box
@@ -81,50 +75,56 @@ export default observer(function BrandForm() {
         >
             <Container maxWidth={false} sx={{ mt: 4, mb: 4 }}>
 
-
-
-
-
                 <Typography variant="h4" gutterBottom>
-                    Create Brand
+                    {(id) ? 'Edit Brand' : 'Create Brand'}            
                 </Typography>
 
-                <Box component="form"  autoComplete='off' onSubmit={handleSubmit} sx={{ mt: 3 }}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12} >
-                            <TextField
-                               
-                                name="name"
-                                required
-                                fullWidth
-                                id="name"
-                                label="Name"
-                                autoFocus
-                            />
-                        </Grid>
-                        <Grid item xs={12} >
-                            <TextField
-                                autoComplete='off'
-                                required
-                                fullWidth
-                                id="description"
-                                label="Description"
-                                name="description"
-                            />
-                        </Grid>
-         
-              
-                    </Grid>
-                    <Button
-                        type="submit"
-                        
-                        variant="contained"
-                        sx={{ mt: 3, mb: 2 }}
-                    >
-                        Submit
-                    </Button>
-                    
-                </Box>
+
+
+                <form onSubmit={formik.handleSubmit}>
+                    <TextField
+                        fullWidth
+                        margin="normal"
+                        id="name"
+                        name="name"
+                        label="Name"
+                        value={formik.values.name}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        error={formik.touched.name && Boolean(formik.errors.name)}
+                        helperText={formik.touched.name && formik.errors.name}
+                    />
+                    <TextField
+                        fullWidth
+                        margin="normal"
+                        id="description"
+                        name="description"
+                        label="Description"
+                        value={formik.values.description}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        error={formik.touched.description && Boolean(formik.errors.description)}
+                        helperText={formik.touched.description && formik.errors.description}
+                    />
+
+                    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', mt: 3, mb: 2 }}>
+                        <Button component={Link} to='/brands' variant="text">Cancel</Button>
+                        <LoadingButton
+                            sx={{ ml: 1 }}
+                            disabled={!formik.dirty || !formik.isValid}
+                            color="primary" variant="contained"
+
+                            type="submit"
+                            loading={formik.isSubmitting}
+
+                        >
+                            Submit
+                        </LoadingButton>
+
+                    </Box>
+
+                </form>
+
 
             </Container>
         </Box>
