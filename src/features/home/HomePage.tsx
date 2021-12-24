@@ -37,7 +37,6 @@ export default observer(function HomePage() {
                     Welcome to the App
                 </Typography>
 
-
                 {userStore.isLoggedIn ? (
                     <>
                         <LinkButton to="/dashboard" variant="contained" >
@@ -48,7 +47,7 @@ export default observer(function HomePage() {
                 ) : (
                     <>
                         <LinkButton to="/login" variant="contained" >
-                            Log In
+                            Login
                         </LinkButton>
 
                     </>

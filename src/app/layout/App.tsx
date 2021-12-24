@@ -4,11 +4,15 @@ import { useEffect } from 'react';
 
 
 import { Route, Switch, useLocation } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import BrandDashboard from '../../features/brands/dashboard/BrandDashboard';
 import Dashboard from '../../features/dashboard/Dashboard';
 import Orders from '../../features/dashboard/Orders';
 import HomePage from '../../features/home/HomePage';
 import LoginPage from '../../features/login/LoginPage';
 import { useStore } from '../stores/store';
+import LoadingComponent from './LoadingComponent';
+import NavBar from './NavBar';
 
 
 
@@ -29,29 +33,30 @@ function App() {
     }
   }, [commonStore, userStore])
 
-  if (!commonStore.appLoaded) return <div>LOADING APP</div>
+  if (!commonStore.appLoaded) return <LoadingComponent />
 
   return (
     <>
-      <Route exact path='/' component={HomePage} />
-      <Route exact path='/login' component={LoginPage} />
-      <Route
-        path={'/(.+)'}
-        render={() => (
-          <>
-            <nav>
+      <ToastContainer position='bottom-right' hideProgressBar />
+      <Switch>
+        <Route exact path='/login' component={LoginPage} />
+        <Route exact path='/' component={HomePage} />
+        <Route
+          path={'/(.+)'}
+          render={() => (
+            <>
+              <NavBar />
 
-            </nav>
-            <main>
               <Switch>
-
-
                 <Route exact path='/dashboard' component={Dashboard} />
-
+                <Route exact path='/orders' component={Orders} />
+                <Route exact path='/brands' component={BrandDashboard} />
               </Switch>
-            </main>
-          </>
-        )} />
+
+            </>
+          )} />
+      </Switch>
+
 
     </>
 

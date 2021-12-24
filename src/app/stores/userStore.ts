@@ -20,7 +20,7 @@ export default class UserStore {
 
     login = async (creds: UserLogin) => {
         store.commonStore.setTenant(creds.tenant);
-
+        console.log(creds)
         try {          
             const response = await agent.Account.login(creds);          
             store.commonStore.setToken(response.data.token);
@@ -29,7 +29,7 @@ export default class UserStore {
             runInAction(() => //timing issue with async operations
                 this.currentUser = user.data
             );
-            history.push('/brands');
+            history.push('/dashboard');
             store.modalStore.closeModal();
         } catch (error) {
             throw error;
