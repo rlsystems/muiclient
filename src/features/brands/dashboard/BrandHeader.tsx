@@ -1,4 +1,5 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
+import { Link } from "react-router-dom";
 
 
 export default function BrandHeader() {
@@ -14,7 +15,9 @@ export default function BrandHeader() {
                     </Typography>
                 </Box>
 
-                <Box sx={{ flexShrink: 0 }}>Button</Box>
+                <Box sx={{ flexShrink: 0 }}>
+                    <Button component={Link} to="/createBrand" variant="outlined">New Brand</Button>
+                </Box>
             </Box>
 
             

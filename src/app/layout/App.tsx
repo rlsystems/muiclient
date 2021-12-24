@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 import { Route, Switch, useLocation } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import BrandDashboard from '../../features/brands/dashboard/BrandDashboard';
+import BrandForm from '../../features/brands/form/BrandForm';
 import Dashboard from '../../features/dashboard/Dashboard';
 import Orders from '../../features/dashboard/Orders';
 import HomePage from '../../features/home/HomePage';
@@ -54,6 +55,8 @@ function App() {
                   <Route exact path='/dashboard' component={Dashboard} />
                   <Route exact path='/orders' component={Orders} />
                   <Route exact path='/brands' component={BrandDashboard} />
+                  <Route exact key={location.key} path={['/createBrand', '/editBrand/:id']} component={BrandForm} />
+                  
                 </Switch>
               </Box>
 
