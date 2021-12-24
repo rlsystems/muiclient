@@ -12,6 +12,7 @@ import AssignmentIcon from '@mui/icons-material/Assignment';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../stores/store';
 import { Link } from 'react-router-dom';
+import { Hail } from '@mui/icons-material';
 
 
 export default observer(function NavBar() {
@@ -50,6 +51,12 @@ export default observer(function NavBar() {
                         <PeopleIcon />
                     </ListItemIcon>
                     <ListItemText primary="Users" />
+                </ListItem>
+                <ListItem button component={Link} to="/tenants">
+                    <ListItemIcon>
+                        <Hail />
+                    </ListItemIcon>
+                    <ListItemText primary="Tenants" />
                 </ListItem>
             </List>
             <Divider />

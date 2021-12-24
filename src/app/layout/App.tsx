@@ -8,10 +8,12 @@ import { Route, Switch, useLocation } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import BrandDashboard from '../../features/brands/dashboard/BrandDashboard';
 import BrandForm from '../../features/brands/form/BrandForm';
-import Dashboard from '../../features/dashboard/Dashboard';
-import Orders from '../../features/dashboard/Orders';
+import Dashboard from '../../features/dashboardSample/Dashboard';
+import Orders from '../../features/dashboardSample/Orders';
 import HomePage from '../../features/home/HomePage';
 import LoginPage from '../../features/login/LoginPage';
+import TenantDashboard from '../../features/tenants/dashboard/TenantDashboard';
+import TenantForm from '../../features/tenants/form/TenantForm';
 import UserDashboard from '../../features/users/dashboard/UserDashboard';
 import UserProfile from '../../features/users/form/UserProfile';
 import UserRegistration from '../../features/users/form/UserRegistration';
@@ -55,15 +57,18 @@ function App() {
                 <NavBar />
 
                 <Switch>
+                  {/* Sample Dashboard */}
                   <Route exact path='/dashboard' component={Dashboard} />
-                  
-                  <Route exact path='/users' component={UserDashboard} />
-                  <Route exact path='/createUser' component={UserRegistration} />
-
-                  <Route exact key={location.key} path={['/editUser', '/editUser/:id']} component={UserProfile} />
 
                   <Route exact path='/brands' component={BrandDashboard} />
                   <Route exact key={location.key} path={['/createBrand', '/editBrand/:id']} component={BrandForm} />
+                  
+                  <Route exact path='/users' component={UserDashboard} />
+                  <Route exact path='/createUser' component={UserRegistration} />
+                  <Route exact key={location.key} path={['/editUser', '/editUser/:id']} component={UserProfile} />
+
+                  <Route exact path='/tenants' component={TenantDashboard} />
+                  <Route exact key={location.key} path={['/createTenant', '/editTenant/:id']} component={TenantForm} />
                   
                 </Switch>
               </Box>
