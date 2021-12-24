@@ -16,7 +16,7 @@ export default function BrandHeader() {
                 </Box>
 
                 <Box sx={{ flexShrink: 0 }}>
-                    <Button component={Link} to="/createBrand" variant="outlined">New Brand</Button>
+                    <Button component={Link} to="/createBrand" variant="contained">New Brand</Button>
                 </Box>
             </Box>
 

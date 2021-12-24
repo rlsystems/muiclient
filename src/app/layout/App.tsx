@@ -12,6 +12,9 @@ import Dashboard from '../../features/dashboard/Dashboard';
 import Orders from '../../features/dashboard/Orders';
 import HomePage from '../../features/home/HomePage';
 import LoginPage from '../../features/login/LoginPage';
+import UserDashboard from '../../features/users/dashboard/UserDashboard';
+import UserProfile from '../../features/users/form/UserProfile';
+import UserRegistration from '../../features/users/form/UserRegistration';
 import { useStore } from '../stores/store';
 import LoadingComponent from './LoadingComponent';
 import NavBar from './NavBar';
@@ -53,7 +56,12 @@ function App() {
 
                 <Switch>
                   <Route exact path='/dashboard' component={Dashboard} />
-                  <Route exact path='/orders' component={Orders} />
+                  
+                  <Route exact path='/users' component={UserDashboard} />
+                  <Route exact path='/createUser' component={UserRegistration} />
+
+                  <Route exact key={location.key} path={['/editUser', '/editUser/:id']} component={UserProfile} />
+
                   <Route exact path='/brands' component={BrandDashboard} />
                   <Route exact key={location.key} path={['/createBrand', '/editBrand/:id']} component={BrandForm} />
                   

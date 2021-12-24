@@ -3,9 +3,7 @@ import { observer } from 'mobx-react-lite';
 import { useStore } from '../../../app/stores/store';
 import { Link } from 'react-router-dom';
 
-function preventDefault(event: React.MouseEvent) {
-    event.preventDefault();
-}
+
 
 export default observer(function BrandListTable() {
     const { brandStore } = useStore();
@@ -38,14 +36,14 @@ export default observer(function BrandListTable() {
                                 <TableCell>{brand.id}</TableCell>
                                 <TableCell sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                                     <Button
-                                        variant="outlined"
+                                        variant="text"
                                         color="error"
                                         onClick={() => brandStore.deleteBrand(brand.id)}
                                         sx={{ mr: 1 }}
                                     >
                                         Delete
                                     </Button>
-                                    <Button component={Link} to={`/editBrand/${brand.id}`} variant="contained" >
+                                    <Button component={Link} to={`/editBrand/${brand.id}`} variant="text" >
                                         Edit
                                     </Button>
                                 </TableCell>
