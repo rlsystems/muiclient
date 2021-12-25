@@ -12,7 +12,8 @@ import Orders from './Orders';
 
 
 
-
+// This is just a sample template from MUI to learn how their components work
+//https://mui.com/getting-started/templates/
 
 
 export default function Dashboard() {

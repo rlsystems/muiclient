@@ -7,7 +7,7 @@ import { Formik, useFormik } from 'formik';
 import * as Yup from 'yup';
 
 import { User } from '../../../app/models/user';
-import { Box, Button, Checkbox, Container, FormControlLabel, FormGroup, Grid, TextField, Typography } from '@mui/material';
+import { Box, Button, Checkbox, Container, Divider, FormControlLabel, FormGroup, Grid, TextField, Typography } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 
 
@@ -91,10 +91,12 @@ export default observer(function UserProfile() {
                 <Container maxWidth={false} sx={{ mt: 4, mb: 4 }}>
 
                     <Typography variant="h4" gutterBottom>
-                        New User Registration
+                        Edit Profile | {userFormValues.firstName} {userFormValues.lastName}
                     </Typography>
-
-
+                    <Typography variant="h6" gutterBottom>
+                        Username: {userFormValues.userName}
+                    </Typography>
+                    <Divider />
 
                     <form onSubmit={formik.handleSubmit}>
 

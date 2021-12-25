@@ -12,11 +12,15 @@ import AssignmentIcon from '@mui/icons-material/Assignment';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../stores/store';
 import { Link } from 'react-router-dom';
-import { Hail } from '@mui/icons-material';
-
+import  { Hail } from '@mui/icons-material';
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
+import theme from '../../theme';
+import ColorModeContext from './App'
 
 export default observer(function NavBar() {
     const { userStore: { currentUser, logout } } = useStore();
+    const { commonStore } = useStore();
     return (
         <Drawer variant="permanent" open={true} sx={{width: '240px', '& .MuiDrawer-paper':{width: '240px'}}}>
             <Toolbar
@@ -27,8 +31,8 @@ export default observer(function NavBar() {
                     px: [1],
                 }}
             >
-                <IconButton >
-                    <ChevronLeftIcon />
+                <IconButton onClick={() => commonStore.setDarkMode()} >
+                    {commonStore.darkMode === true ? <Brightness7Icon /> : <Brightness4Icon />}
                 </IconButton>
             </Toolbar>
             <Divider />
@@ -62,6 +66,12 @@ export default observer(function NavBar() {
             <Divider />
             <List>
                 <ListSubheader inset>Account</ListSubheader>
+                  <ListItem button component={Link} to="/editUser">
+                    <ListItemIcon>
+                        <AssignmentIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Edit Profile" />
+                </ListItem>
                 <ListItem button>
                     <ListItemIcon>
                         <AssignmentIcon />

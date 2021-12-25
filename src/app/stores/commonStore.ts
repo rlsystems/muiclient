@@ -5,6 +5,9 @@ export default class CommonStore {
     error: ServerError | null = null;
     token: string | null = window.localStorage.getItem('jwt');
     tenant: string | null = '';
+
+    darkMode = true;
+
     appLoaded = false;
 
     constructor() {
@@ -26,6 +29,8 @@ export default class CommonStore {
         this.error = error;
     }
 
+
+
     setToken = (token: string | null) => {
         //if(token) window.localStorage.setItem('jwt', token); //set to browser local storage --> now taken care of by the reaction
         this.token = token;
@@ -38,4 +43,9 @@ export default class CommonStore {
     setAppLoaded = () => {
         this.appLoaded = true;
     }
+
+    setDarkMode = () => {
+        this.darkMode == false ? this.darkMode = true : this.darkMode = false;
+    }
+
 }

@@ -7,7 +7,7 @@ import { Formik, useFormik } from 'formik';
 import * as Yup from 'yup';
 
 import { RegisterUserFormValues, User } from '../../../app/models/user';
-import { Box, Button, Container, FormControlLabel, Grid, TextField, Typography } from '@mui/material';
+import { Box, Button, Container, Divider, FormControlLabel, Grid, TextField, Typography } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 
 
@@ -73,7 +73,7 @@ export default observer(function UserProfile() {
                     <Typography variant="h4" gutterBottom>
                         New User Registration
                     </Typography>
-
+                    <Divider />
 
 
                     <form onSubmit={formik.handleSubmit}>

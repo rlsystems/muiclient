@@ -58,7 +58,6 @@ export default observer(function TenantForm() {
 
 
 
-    if (loadingInitial) return <LoadingComponent content='Loading user...' />
 
     return (
         <>
@@ -77,7 +76,7 @@ export default observer(function TenantForm() {
                 <Container maxWidth={false} sx={{ mt: 4, mb: 4 }}>
 
                     <Typography variant="h4" gutterBottom>
-                        New User Registration
+                        New Tenant Registration
                     </Typography>
 
 
