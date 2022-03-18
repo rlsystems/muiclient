@@ -1,8 +1,7 @@
-import { Button, Paper, Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@mui/material';
+import { Button, Paper, Table, TableBody, TableCell, TableHead, TableRow, TableContainer, Typography } from '@mui/material';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../../app/stores/store';
 import { Link } from 'react-router-dom';
-
 
 
 export default observer(function BrandListTable() {

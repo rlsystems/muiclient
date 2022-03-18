@@ -4,7 +4,7 @@ import LoadingComponent from '../../../app/layout/LoadingComponent';
 import { useStore } from '../../../app/stores/store';
 import Box from '@mui/material/Box';
 
-import BrandListTable from './BrandListTable';
+import BrandListTable2 from './BrandListTable2';
 import { Container } from '@mui/material';
 import BrandHeader from './BrandHeader';
 
@@ -39,7 +39,7 @@ export default observer(function BrandDashboard() {
         >
             <Container maxWidth={false} sx={{ mt: 4, mb: 4 }}>
                 <BrandHeader/>
-                <BrandListTable />
+                <BrandListTable2 />
             </Container>
 
 
