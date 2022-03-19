@@ -3,6 +3,7 @@ import agent from "../api/agent";
 import { User, UserLogin } from "../models/user";
 import { store } from "./store";
 import { history } from '../..';
+import { Venue } from "../models/venue";
 
 export default class UserStore {
 
@@ -18,7 +19,10 @@ export default class UserStore {
         return !!this.currentUser;
     }
 
+    
+
     login = async (creds: UserLogin) => {
+        
         store.commonStore.setTenant(creds.tenant);
         console.log(creds)
         try {          
@@ -29,7 +33,8 @@ export default class UserStore {
             runInAction(() => //timing issue with async operations
                 this.currentUser = user.data
             );
-            history.push('/dashboard');
+            history.push('/venues');
+            //navigate("/dashboard", { replace: true });
             store.modalStore.closeModal();
         } catch (error) {
             throw error;
@@ -39,12 +44,14 @@ export default class UserStore {
 
     logout = () => {
         store.commonStore.setToken(null);
+        store.venueStore.selectedVenue = undefined; //hack to set blank
+        store.venueStore.venueRegistry = new Map<string, Venue>(); //hack to set blank
+
         window.localStorage.removeItem('jwt');
         this.currentUser = null;
         history.push('/');
     };
  
-
 
 
     setLoadingInitial = (state: boolean) => {
@@ -89,3 +96,7 @@ export default class UserStore {
 
 
 }
+
+
+
+

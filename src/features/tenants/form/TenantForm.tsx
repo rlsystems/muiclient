@@ -6,7 +6,7 @@ import { useStore } from '../../../app/stores/store';
 import { Formik, useFormik } from 'formik';
 import * as Yup from 'yup';
 
-import { Tenant } from '../../../app/models/tenant';
+import { CreateTenantRequest, Tenant } from '../../../app/models/tenant';
 import { Box, Button, Checkbox, Container, FormControlLabel, FormGroup, Grid, TextField, Typography } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 
@@ -20,30 +20,26 @@ export default observer(function TenantForm() {
 
     const { id } = useParams<{ id: string }>(); //in case this is admin edit
 
-    const [tenantFormValues, setTenantFormValues] = useState<Tenant>({ //Local State
-        id: '',
-        name: '',
+    const [tenantFormValues, setTenantFormValues] = useState<CreateTenantRequest>({ //Local State
         key: '',
         adminEmail: '',
-        connectionString: '',
-        isActive: true,
-        validUpto: null
+        password: ''
     });
 
     //gets passed to formik
     const validationSchema = Yup.object({
-        name: Yup.string().required('The name is required'),
         key: Yup.string().required('The key is required'),
         adminEmail: Yup.string().required('The admin email is required').email(),
-        connectionString: Yup.string().notRequired()
+        password: Yup.string().required('The password is required'),
     })
 
-    useEffect(() => {
-        if (id) {
-            loadTenant(id).then(tenant => setTenantFormValues(tenant!))
-        }
-    }, [id, loadTenant])
 
+    //For edit
+    // useEffect(() => {
+    //     if (id) {
+    //         loadTenant(id).then(tenant => setTenantFormValues(tenant!))
+    //     }
+    // }, [id, loadTenant])
 
 
 
@@ -51,10 +47,11 @@ export default observer(function TenantForm() {
         initialValues: tenantFormValues,
         validationSchema: validationSchema,
         enableReinitialize: true,
-        onSubmit: (tenant: Tenant) => {
-            createTenant(tenant).then(() => history.push(`/tenants/`))
+        onSubmit: (createTenantRequest: CreateTenantRequest) => {
+            createTenant(createTenantRequest).then(() => history.push(`/tenants/`))
         }
     });
+
 
 
 
@@ -83,19 +80,6 @@ export default observer(function TenantForm() {
 
                     <form onSubmit={formik.handleSubmit}>
 
-
-                        <TextField
-                            fullWidth
-                            margin="normal"
-                            id="name"
-                            name="name"
-                            label="Name"
-                            value={formik.values.name}
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                            error={formik.touched.name && Boolean(formik.errors.name)}
-                            helperText={formik.touched.name && formik.errors.name}
-                        />
                         <TextField
                             fullWidth
                             margin="normal"
@@ -121,19 +105,18 @@ export default observer(function TenantForm() {
                             error={formik.touched.adminEmail && Boolean(formik.errors.adminEmail)}
                             helperText={formik.touched.adminEmail && formik.errors.adminEmail}
                         />
-                        <TextField
+                         <TextField
                             fullWidth
                             margin="normal"
-                            id="connectionString"
-                            name="connectionString"
-                            label="Connection String"
-                            value={formik.values.connectionString}
+                            id="password"
+                            name="password"
+                            label="Password"
+                            value={formik.values.password}
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
-                            error={formik.touched.connectionString && Boolean(formik.errors.connectionString)}
-                            helperText={formik.touched.connectionString && formik.errors.connectionString}
+                            error={formik.touched.password && Boolean(formik.errors.password)}
+                            helperText={formik.touched.password && formik.errors.password}
                         />
-
 
 
                         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', mt: 3, mb: 2 }}>

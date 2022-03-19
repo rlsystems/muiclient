@@ -30,15 +30,12 @@ export default observer(function TenantListTable() {
                 <TableBody>
                     {tenantsSorted.map((tenant) => (
                         <TableRow key={tenant.id}>
-                            <TableCell>{tenant.name}</TableCell>
                             <TableCell>{tenant.key}</TableCell>
-                            <TableCell>{tenant.adminEmail}</TableCell>
-                            <TableCell>{tenant.connectionString}</TableCell>
+
                             <TableCell>{tenant.isActive ?
                                 <Chip label="True" variant="outlined" color="success" sx={{width: '4rem'}} /> :
                                 <Chip label="False" variant="outlined" color="error"  sx={{width: '4rem'}}/>}
                             </TableCell>
-                            <TableCell>{tenant.validUpto}</TableCell>
                             
                         </TableRow>
                     ))}

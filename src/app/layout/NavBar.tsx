@@ -44,11 +44,11 @@ export default observer(function NavBar() {
                     </ListItemIcon>
                     <ListItemText primary="Dashboard" />
                 </ListItem>
-                <ListItem button component={Link} to="/brands">
+                <ListItem button component={Link} to="/venues">
                     <ListItemIcon>
                         <ShoppingCartIcon />
                     </ListItemIcon>
-                    <ListItemText primary="Brands" />
+                    <ListItemText primary="Venues" />
                 </ListItem>
                 <ListItem button component={Link} to="/users">
                     <ListItemIcon>

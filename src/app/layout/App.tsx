@@ -7,8 +7,8 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import { Route, Switch, useLocation } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import BrandDashboard from '../../features/brands/dashboard/BrandDashboard';
-import BrandForm from '../../features/brands/form/BrandForm';
+import VenueDashboard from '../../features/venues/dashboard/VenueDashboard';
+import VenueForm from '../../features/venues/form/VenueForm';
 import Dashboard from '../../features/dashboardSample/Dashboard';
 import Orders from '../../features/dashboardSample/Orders';
 import HomePage from '../../features/home/HomePage';
@@ -80,8 +80,8 @@ function App() {
 
                   <Route exact path='/dashboard' component={Dashboard} />
 
-                  <Route exact path='/brands' component={BrandDashboard} />
-                  <Route exact key={location.key} path={['/createBrand', '/editBrand/:id']} component={BrandForm} />
+                  <Route exact path='/venues' component={VenueDashboard} />
+                  <Route exact key={location.key} path={['/createVenue', '/editVenue/:id']} component={VenueForm} />
 
                   <Route exact path='/users' component={UserDashboard} />
                   <Route exact path='/createUser' component={UserRegistration} />
